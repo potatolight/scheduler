@@ -7,7 +7,6 @@ import Show from "components/Appointment/Show"
 const classnames = require('classnames');
 
 export default function Appointment(props) {
-  console.log(props.interview)
   return (
     <article className="appointment">
     <Header time={props.time} />
