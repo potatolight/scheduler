@@ -4,53 +4,7 @@ import DayList from "components/DayList"
 import Appointment from "components/Appointment"
 import "components/Application.scss";
 
-import { getAppointmentsForDay } from "helpers/selectors";
-// const appointments = [
-//   {
-//     id: 1,
-//     time: "12pm",
-//   },
-//   {
-//     id: 2,
-//     time: "1pm",
-//     interview: {
-//       student: "Lydia Miller-Jones",
-//       interviewer: {
-//         id: 1,
-//         name: "Sylvia Palmer",
-//         avatar: "https://i.imgur.com/LpaY82x.png",
-//       }
-//     }
-//   },
-//   {
-//     id: 3,
-//     time: "2pm",
-//     interview: {
-//       student: "Yaya",
-//       interviewer: {
-//         id: 5,
-//         name: "Sven Jones",
-//         avatar: "https://i.imgur.com/twYrpay.jpg",
-//       }
-//     }
-//   },
-//   {
-//     id: 4,
-//     time: "3pm",
-//   },
-//   {
-//     id: 5,
-//     time: "4pm",
-//     interview: {
-//       student: "Lele ",
-//       interviewer: {
-//         id: 4,
-//         name: "Cohana Roy",
-//         avatar: "https://i.imgur.com/FK8V841.jpg",
-//       }
-//     }
-//   }
-// ];
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 
 export default function Application(props) {
@@ -59,7 +13,8 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: []
   });
   
   const setDays = (days) => {
@@ -76,26 +31,43 @@ export default function Application(props) {
   useEffect(() => {
     const promise1 = axios.get("/api/days");
     const promise2 = axios.get("/api/appointments")
+    const promise3 = axios.get("/api/interviewers")
     Promise.all([
       promise1,
-      promise2
+      promise2,
+      promise3
     ]).then((results) => {
-      console.log(results)
-      let [result1, result2] = results
-      setState(prev =>({days: result1.data, appointments: result2.data}));
+      let [result1, result2, result3] = results
+      setState(prev =>({...prev, days: result1.data, appointments: result2.data, interviewers: result3.data}));
     });
   }, [])
+
+  // const day = state.day
+  // const appointments = getAppointmentsForDay(state, day)
+  // const list = appointments.map(appointment => {
+    
+  //   return (
+  //     <Appointment
+  //     key={appointment.id}
+  //     {...appointment} />
+  //   )
+  // })
   const day = state.day
-  const appointments = getAppointmentsForDay(state, day)
-  const list = appointments.map(appointment => {
-    
-    
-    return (
-      <Appointment
+  const appointments = getAppointmentsForDay(state, day);
+
+const schedule = appointments.map((appointment) => {
+  const interview = getInterview(state, appointment.interview);
+  const interviewers = getInterviewersForDay(state, day)
+  return (
+    <Appointment
       key={appointment.id}
-      {...appointment} />
-    )
-  })
+      id={appointment.id}
+      time={appointment.time}
+      interview={interview}
+      interviewers={interviewers}
+    />
+  );
+});
 
   return (
     <main className="layout">
@@ -122,7 +94,7 @@ export default function Application(props) {
         </>}
       </section>
       <section className="schedule">
-        {list}
+        {schedule}
         <Appointment key="last" time="5pm" />
       </section>
     </main>
