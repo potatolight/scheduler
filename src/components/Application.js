@@ -15,6 +15,7 @@ export default function Application(props) {
     cancelInterview
   } = useApplicatinData();
 
+
   const day = state.day
   const appointments = getAppointmentsForDay(state, day);
 
@@ -50,6 +51,7 @@ const schedule = appointments.map((appointment) => {
              days={state.days} 
              day={state.day} 
              setDay={setDay}
+             spots={state.spots}
             />
          </nav>
          <img

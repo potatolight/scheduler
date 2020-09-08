@@ -6,12 +6,12 @@ export default function useVisualMode(initial) {
 
   function back() { 
     history.pop()
-    const x = history.pop()
-    if(!x) {
+    const afterPop = history.pop()
+    if(!afterPop) {
       setMode(initial)
       setHistory([initial])
     } else {
-      setMode(x)
+      setMode(afterPop)
       setHistory([...history])
     }
   }

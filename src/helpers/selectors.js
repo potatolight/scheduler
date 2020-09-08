@@ -43,6 +43,12 @@ export function getInterviewersForDay(state, day) {
 }
 
 
+export function getSpotsRemaining (state, day) {
+  const noInterviews = getAppointmentsForDay(state, day).filter((appointment) => (!appointment.interview))
+  const spotsRemaining = noInterviews.length;
+  return spotsRemaining;
+}
+
 // export function getInterviewersForDay(state, day) {
 //   const interviewer = []
 //   let arr;
