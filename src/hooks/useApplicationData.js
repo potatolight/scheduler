@@ -6,10 +6,10 @@ export default function useApplicatinData() {
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: []
-    // spots: 5
+    interviewers: [],
+    spots: 5
   });
-  
+
   const setDay = (day) =>{
     setState({...state, day});
   }
@@ -24,16 +24,11 @@ export default function useApplicatinData() {
       [id]: appointment
     };
 
-    const day = { 
-      ...state.days.find(day => day.appointments.includes(id)),
-      ...state.days[id-1].spots-=1
-      }
-    // const day ={ 
+    // const day = {
     //   ...state.days.find(day => day.appointments.includes(id)),
-    //   ...getSpotsRemaining(state, state.day)
-    // }
-      
-   
+    //   ...state.days[id-1].spots-=1
+    //   }
+
    return  axios.put(`/api/appointments/${id}`, appointment)
    .then(()=>{
     setState(prev=>({
@@ -43,7 +38,7 @@ export default function useApplicatinData() {
     // console.log("fetching test")
     axios.get(`/api/days`)
     .then( result=>{
-     
+
       setState(prev=>({
       ...prev, days:result.data
     }))})
@@ -61,26 +56,19 @@ export default function useApplicatinData() {
       [id]: appointment
     }
 
-    const day = { 
-      ...state.days.find(day => day.appointments.includes(id)),
-      ...state.days[id-1].spots += 1
-      }
-    
     getSpotsRemaining(state, state.day)
     return axios.delete(`/api/appointments/${id}`, appointment)
     .then(()=>{
       setState(prev=>({
         ...prev, appointments
       }))
-    })
-    .then(()=>{
+    }).then(()=>{
       axios.get(`/api/days`)
       .then( result=>{setState(prev=>({
         ...prev, days:result.data
       }))})
     })
 }
-
 
   useEffect(() => {
     const promise1 = axios.get("/api/days");
