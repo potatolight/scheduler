@@ -51,7 +51,6 @@ const schedule = appointments.map((appointment) => {
              days={state.days} 
              day={state.day} 
              setDay={setDay}
-             spots={state.spots}
             />
          </nav>
          <img

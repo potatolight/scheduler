@@ -54,17 +54,24 @@ const fixtures = {
 };
 export default {
   put: jest.fn(url => {
-    console.log("updating appointment")
+    // console.log("updating appointment")
     if (url === `/api/appointments/1`) {
       return Promise.resolve({
         status: 204,
-        statusText: "No Content",
+        statusText: "No Content"
       });
     }
   }),
+
+  delete: jest.fn(() => {
+      // console.log("deleting")
+      return Promise.resolve({
+        status: 204,
+        statusText: "No Content"
+      })
+  }),
   
   get: jest.fn(url => {
-    console.log("updating days2")
     if (url === "/api/days") {
       return Promise.resolve({
         status: 200,
