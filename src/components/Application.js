@@ -1,9 +1,9 @@
-import React, { useState, useEffect }from "react";
-import axios from "axios";
-import DayList from "components/DayList"
-import Appointment from "components/Appointment"
+import React from "react";
+// import axios from "axios";
+import DayList from "components/DayList";
+import Appointment from "components/Appointment";
 import "components/Application.scss";
-import useApplicatinData from "../hooks/useApplicationData"
+import useApplicatinData from "../hooks/useApplicationData";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 
@@ -16,25 +16,25 @@ export default function Application(props) {
   } = useApplicatinData();
 
 
-  const day = state.day
+  const day = state.day;
   const appointments = getAppointmentsForDay(state, day);
 
-const schedule = appointments.map((appointment) => {
-  const interview = getInterview(state, appointment.interview);
-  const interviewers = getInterviewersForDay(state, day)
+  const schedule = appointments.map((appointment) => {
+    const interview = getInterview(state, appointment.interview);
+    const interviewers = getInterviewersForDay(state, day)
   
-  return (
-    <Appointment
-      key={appointment.id}
-      id={appointment.id}
-      time={appointment.time}
-      interview={interview}
-      interviewers={interviewers}
-      bookInterview={bookInterview}
-      cancelInterview={cancelInterview}
-    />
-  );
-});
+    return (
+      <Appointment
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interview={interview}
+        interviewers={interviewers}
+        bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
+      />
+    );
+  });
 
   return (
     <main className="layout">
@@ -45,20 +45,20 @@ const schedule = appointments.map((appointment) => {
             src="images/logo.png"
             alt="Interview Scheduler"
           />
-         <hr className="sidebar__separator sidebar--centered" />
-         <nav className="sidebar__menu">
+          <hr className="sidebar__separator sidebar--centered" />
+          <nav className="sidebar__menu">
             <DayList
-             days={state.days} 
-             day={state.day} 
-             setDay={setDay}
-            spots={state.spots}
+              days={state.days} 
+              day={state.day} 
+              setDay={setDay}
+              spots={state.spots}
             />
-         </nav>
-         <img
+          </nav>
+          <img
             className="sidebar__lhl sidebar--centered"
             src="images/lhl.png"
             alt="Lighthouse Labs"
-        />
+          />
         </>}
       </section>
       <section className="schedule">

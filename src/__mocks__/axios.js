@@ -53,28 +53,19 @@ const fixtures = {
   }
 };
 export default {
-  // put: jest.fn(url => {
-  //   // console.log("updating appointment")
-  //   if (url === `/api/appointments/1`) {
-  //     return Promise.resolve({
-  //       status: 204,
-  //       statusText: "No Content"
-  //     });
-  //   }
-  // }),
+
   put: jest.fn(() => {
     return Promise.resolve({
       status: 204,
       statusText: "No Content"
-    })
+    });
 }),
 
   delete: jest.fn(() => {
-      // console.log("deleting")
       return Promise.resolve({
         status: 204,
         statusText: "No Content"
-      })
+      });
   }),
   
   get: jest.fn(url => {
@@ -86,7 +77,6 @@ export default {
       });
     }
     if (url === "/api/appointments") {
-      /* Resolve appointments data */
       return Promise.resolve({
         status: 200,
         statusText: "OK",
@@ -94,7 +84,6 @@ export default {
       });
     }
     if (url === "/api/interviewers") {
-      /* Resolve interviewers data */
       return Promise.resolve({
         status: 200,
         statusText: "OK",
