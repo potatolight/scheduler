@@ -1,23 +1,23 @@
 # Interview Scheduler
+Interview Scheduler is a single page application (SPA) bult with React that allows users to book, update, and cancel interviews.
 
-## Setup
+## Final Product
 
-Install dependencies with `npm install`.
+!["screenshot of Home page"](https://github.com/potatolight/scheduler/blob/master/docs/homepage.png)
+!["screenshot of Booking interview page"](https://github.com/potatolight/scheduler/blob/master/docs/bookInterview.png)
 
-## Running Webpack Development Server
+## Dependencies
 
-```sh
-npm start
-```
+- axios
+- @testing-library/react-hooks
+- react-test-renderer
 
-## Running Jest Test Framework
+## Getting Started
 
-```sh
-npm test
-```
+- Install all dependencies (using the `npm install` command).
+- Run the Webpack Development Server using the `npm start` command.
+- Run the Jest Test Framework using the `npm test` command.
+- Run the Storybook `npm run storybook` command.
 
-## Running Storybook Visual Testbed
 
-```sh
-npm run storybook
-```
+
