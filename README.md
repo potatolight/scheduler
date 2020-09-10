@@ -4,6 +4,7 @@ Interview Scheduler is a single page application (SPA) bult with React that allo
 ## Final Product
 
 !["screenshot of Home page"](https://github.com/potatolight/scheduler/blob/master/docs/homepage.png)
+
 !["screenshot of Booking interview page"](https://github.com/potatolight/scheduler/blob/master/docs/bookInterview.png)
 
 ## Dependencies
